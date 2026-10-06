@@ -21,7 +21,9 @@ const projects = (await getCollection('projects')).sort(
 			{
 				projects.map((project) => (
 					<li>
-						<h2>{project.data.title}</h2>
+						<h2>
+							<a href={`/projects/${project.id}`}>{project.data.title}</a>
+						</h2>
 						<p>{project.data.summary}</p>
 						<p>Stack: {project.data.stack.join(', ')}</p>
 						<a href={project.data.repo} target="_blank" rel="noopener noreferrer">

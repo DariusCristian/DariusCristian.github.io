@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const projects = await getCollection('projects');
+	return projects.map((project) => ({
+		params: { id: project.id },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{project.data.title}</title>
+	</head>
+	<body>
+		<a href="/">Back to all projects</a>
+		<h1>{project.data.title}</h1>
+		<p>Stack: {project.data.stack.join(', ')}</p>
+		<Content />
+		<p>
+			<a href={project.data.repo} target="_blank" rel="noopener noreferrer">
+				GitHub repo
+			</a>
+		</p>
+		{
+			project.data.demo && (
+				<p>
+					<a href={project.data.demo} target="_blank" rel="noopener noreferrer">
+						Live demo
+					</a>
+				</p>
+			)
+		}
+	</body>
+</html>
