@@ -1,37 +1,28 @@
 ---
 import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const projects = (await getCollection('projects')).sort(
 	(a, b) => a.data.order - b.data.order,
 );
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Projects</h1>
-		<ul>
-			{
-				projects.map((project) => (
-					<li>
-						<h2>
-							<a href={`/projects/${project.id}`}>{project.data.title}</a>
-						</h2>
-						<p>{project.data.summary}</p>
-						<p>Stack: {project.data.stack.join(', ')}</p>
-						<a href={project.data.repo} target="_blank" rel="noopener noreferrer">
-							GitHub repo
-						</a>
-					</li>
-				))
-			}
-		</ul>
-	</body>
-</html>
+<BaseLayout title="Darius Cristian Horătău | Portfolio">
+	<h1>Projects</h1>
+	<ul>
+		{
+			projects.map((project) => (
+				<li>
+					<h2>
+						<a href={`/projects/${project.id}`}>{project.data.title}</a>
+					</h2>
+					<p>{project.data.summary}</p>
+					<p>Stack: {project.data.stack.join(', ')}</p>
+					<a href={project.data.repo} target="_blank" rel="noopener noreferrer">
+						GitHub repo
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</BaseLayout>
