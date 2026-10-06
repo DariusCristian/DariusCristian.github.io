@@ -1,4 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+	(a, b) => a.data.order - b.data.order,
+);
 ---
 
 <html lang="en">
@@ -11,6 +16,20 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<h1>Projects</h1>
+		<ul>
+			{
+				projects.map((project) => (
+					<li>
+						<h2>{project.data.title}</h2>
+						<p>{project.data.summary}</p>
+						<p>Stack: {project.data.stack.join(', ')}</p>
+						<a href={project.data.repo} target="_blank" rel="noopener noreferrer">
+							GitHub repo
+						</a>
+					</li>
+				))
+			}
+		</ul>
 	</body>
 </html>
