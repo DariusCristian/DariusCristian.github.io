@@ -43,3 +43,20 @@ body {
 	margin-inline: auto;
 	padding-inline: var(--space-3);
 }
+
+/* Typography: avoid lonely last words and balance headings */
+p,
+li {
+	text-wrap: pretty;
+}
+
+h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+/* Keep a word or phrase on one line (e.g. hyphenated terms) */
+.nowrap {
+	white-space: nowrap;
+}
