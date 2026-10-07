@@ -15,22 +15,24 @@ const { Content } = await render(project);
 ---
 
 <BaseLayout title={`${project.data.title} | Darius Cristian Horătău`}>
-	<a href="/">Back to all projects</a>
-	<h1>{project.data.title}</h1>
-	<p>Stack: {project.data.stack.join(', ')}</p>
-	<Content />
-	<p>
-		<a href={project.data.repo} target="_blank" rel="noopener noreferrer">
-			GitHub repo
-		</a>
-	</p>
-	{
-		project.data.demo && (
-			<p>
-				<a href={project.data.demo} target="_blank" rel="noopener noreferrer">
-					Live demo
-				</a>
-			</p>
-		)
-	}
+	<main class="container">
+		<a href="/">Back to all projects</a>
+		<h1>{project.data.title}</h1>
+		<p>Stack: {project.data.stack.join(', ')}</p>
+		<Content />
+		<p>
+			<a href={project.data.repo} target="_blank" rel="noopener noreferrer">
+				GitHub repo
+			</a>
+		</p>
+		{
+			project.data.demo && (
+				<p>
+					<a href={project.data.demo} target="_blank" rel="noopener noreferrer">
+						Live demo
+					</a>
+				</p>
+			)
+		}
+	</main>
 </BaseLayout>
