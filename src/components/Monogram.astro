@@ -1,0 +1,28 @@
+---
+interface Props {
+	size?: number;
+}
+
+const { size = 40 } = Astro.props;
+---
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="0 0 64 64"
+	width={size}
+	height={size}
+	aria-hidden="true"
+	focusable="false"
+>
+	<rect width="64" height="64" rx="12" fill="#1e3a5f"></rect>
+	<text
+		x="32"
+		y="33"
+		fill="#ffffff"
+		font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif"
+		font-size="28"
+		font-weight="700"
+		text-anchor="middle"
+		dominant-baseline="central">DH</text
+	>
+</svg>
