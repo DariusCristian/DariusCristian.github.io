@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import StackTags from './StackTags.astro';
 
 interface Props {
 	project: CollectionEntry<'projects'>;
@@ -29,9 +30,9 @@ const imageSrc = image && (image.startsWith('/') ? image : `/${image}`);
 		<div class="body">
 			<h2>{title}</h2>
 			<p class="summary">{summary}</p>
-			<ul class="tags">
-				{stack.map((tech) => <li>{tech}</li>)}
-			</ul>
+			<div class="card-tags">
+				<StackTags stack={stack} />
+			</div>
 		</div>
 	</article>
 </a>
@@ -116,21 +117,9 @@ const imageSrc = image && (image.startsWith('/') ? image : `/${image}`);
 		color: var(--color-text-muted);
 	}
 
-	.tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--space-2);
-		margin: var(--space-2) 0 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	.tags li {
-		padding: var(--space-1) var(--space-2);
-		border: 1px solid var(--color-border);
-		border-radius: 999px;
-		font-size: 0.8rem;
-		line-height: 1.2;
+	/* Extra space between the summary and the stack tags */
+	.card-tags {
+		margin-top: var(--space-2);
 	}
 
 	/* Keep the color change, but drop the movement for users who ask for less motion */

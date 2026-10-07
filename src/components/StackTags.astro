@@ -1,0 +1,30 @@
+---
+interface Props {
+	stack: string[];
+}
+
+const { stack } = Astro.props;
+---
+
+<ul class="tags">
+	{stack.map((tech) => <li>{tech}</li>)}
+</ul>
+
+<style>
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.tags li {
+		padding: var(--space-1) var(--space-2);
+		border: 1px solid var(--color-border);
+		border-radius: 999px;
+		font-size: 0.8rem;
+		line-height: 1.2;
+	}
+</style>
