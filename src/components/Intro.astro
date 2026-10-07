@@ -1,23 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/darius-portrait.jpg';
+---
+
 <section class="intro" aria-labelledby="intro-heading">
-	<h1 id="intro-heading">Hi, I'm Darius.</h1>
-	<p class="lead">
-		I'm an <span class="nowrap">early-career</span> software engineer looking for internship and
-		junior roles in software engineering, <span class="nowrap">full-stack</span> development or data
-		engineering.
-	</p>
-	<p class="secondary">
-		I'm currently doing a master's in Software Engineering at Babeș-Bolyai University in <span
-			class="nowrap">Cluj-Napoca</span
-		>. Below are the projects I've built, from <span class="nowrap">full-stack</span> web platforms
-		to <span class="nowrap">data-driven tools.</span>
-	</p>
+	<div class="text">
+		<h1 id="intro-heading">Hi, I'm Darius.</h1>
+		<p class="lead">
+			I'm an <span class="nowrap">early-career</span> software engineer looking for internship and
+			junior roles in software engineering, <span class="nowrap">full-stack</span> development or data
+			engineering.
+		</p>
+		<p class="secondary">
+			I'm currently doing a master's in Software Engineering at Babeș-Bolyai University in <span
+				class="nowrap">Cluj-Napoca</span
+			>. Below are the projects I've built, from <span class="nowrap">full-stack</span> web platforms
+			to <span class="nowrap">data-driven tools.</span>
+		</p>
+	</div>
+
+	<Image
+		class="portrait"
+		src={portrait}
+		alt="Portrait of Darius Cristian Horătău"
+		width={240}
+		height={240}
+		densities={[1, 2]}
+		priority
+	/>
 </section>
 
 <style>
 	.intro {
+		/* Text on the left, photo on the right, vertically centered */
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: center;
+		gap: var(--space-5);
+		padding-block: var(--space-5);
+	}
+
+	.text {
 		/* One shared width so both paragraphs end at the same right edge */
 		max-width: 46rem;
-		padding-block: var(--space-5);
+	}
+
+	.portrait {
+		display: block;
+		width: 240px;
+		height: auto;
+		aspect-ratio: 1;
+		object-fit: cover;
+		border-radius: 50%;
+		/* Thin accent ring with a small white gap around the photo */
+		box-shadow:
+			0 0 0 4px var(--color-bg),
+			0 0 0 6px var(--color-accent);
+	}
+
+	/* Phones (same breakpoint as the header): photo above the heading, smaller */
+	@media (max-width: 600px) {
+		.intro {
+			grid-template-columns: 1fr;
+			gap: var(--space-4);
+		}
+
+		.portrait {
+			order: -1;
+			width: 140px;
+		}
 	}
 
 	h1 {
