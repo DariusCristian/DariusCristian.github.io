@@ -19,8 +19,12 @@ A Poisson regression estimates each team's attacking and defensive strength plus
 
 I tuned on a validation season and kept a frozen test window for the final numbers, with walk-forward prediction so the model never sees future matches. On the test set, it achieved 5.3% lower log loss than a league-average baseline. Along the way, an earlier 5.4% result turned out to be mostly selection bias, which taught me why a proper held-out split matters.
 
+## Live predictions
+
+The first round of live predictions has now been scored, and the site's record page shows each one next to its result. A handful of matches is far too few to judge a model, so the held-out test result stays the headline number; the live record will become meaningful as the season goes on.
+
 ## Highlights
 
-- 86 automated tests with pytest
+- 92 automated tests with pytest
 - Every experiment logged, including negative results
-- Static site with fixtures, match details and the prediction record, deployed by GitHub Actions
+- Static site with fixtures, match details, the league table and the prediction record, deployed by GitHub Actions
