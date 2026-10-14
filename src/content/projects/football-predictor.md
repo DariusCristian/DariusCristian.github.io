@@ -4,6 +4,7 @@ summary: "A statistical model that predicts Premier League match outcomes as pro
 stack: ["Python", "pandas", "statsmodels", "SciPy", "GitHub Actions", "JavaScript"]
 repo: "https://github.com/DariusCristian/football-predictor"
 demo: "https://dariuscristian.github.io/football-predictor/"
+image: "../../assets/projects/football-predictor.png"
 order: 2
 ---
 
