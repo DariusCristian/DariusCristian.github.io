@@ -1,43 +1,92 @@
-# Astro Starter Kit: Minimal
+# Darius Cristian Horătău · Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+My personal portfolio: a fast, static site showcasing my software projects.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Live site:** https://dariuscristian.github.io
 
-## 🚀 Project Structure
+![Astro](https://img.shields.io/badge/Astro-7-BC52EE?logo=astro&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-plain-1572B6?logo=css&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/deployed-GitHub_Pages-222222?logo=github)
 
-Inside of your Astro project, you'll see the following folders and files:
+---
+
+## Features
+
+- **Content-driven gallery.** Each project is one Markdown file. The home page card, the project page and its URL are generated from it automatically.
+- **Validated content.** A typed schema checks every project file at build time, so a missing field or a malformed link stops the build instead of reaching the live site.
+- **One page per project** at `/projects/<id>`, generated with a dynamic route and static site generation.
+- **Optimized images.** Screenshots and the portrait are resized and converted to WebP at build time, with 1x and 2x versions and fixed dimensions to prevent layout shift.
+- **Responsive layout.** A CSS Grid gallery that adapts from three columns to one without media queries.
+- **Accessible by design.** Semantic HTML, one `h1` per page, visible keyboard focus, screen-reader text for links that open in a new tab, and reduced motion for users who request it.
+- **No runtime JavaScript and no CSS framework.** Pages ship as plain HTML and CSS, styled with design tokens (CSS custom properties).
+- **Continuous deployment.** Every push to `main` builds and deploys the site with GitHub Actions.
+
+## Tech stack
+
+| Area | Technology |
+|---|---|
+| Framework | Astro 7 (static output) |
+| Language | TypeScript (strict) |
+| Styling | Plain CSS with design tokens and scoped component styles |
+| Content | Astro content collections with a Zod schema |
+| Images | `astro:assets` (`<Image>` and the `image()` schema helper) |
+| Hosting | GitHub Pages, deployed by GitHub Actions |
+
+## Project structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── assets/              # images processed at build time (portrait, project screenshots)
+├── components/          # Header, Intro, Monogram, ProjectCard, StackTags
+├── content/projects/    # one Markdown file per project
+├── layouts/             # BaseLayout: shared <head>, header and page shell
+├── pages/
+│   ├── index.astro          # home page: intro and project gallery
+│   └── projects/[id].astro  # one generated page per project
+├── styles/global.css    # design tokens, base styles and utilities
+└── content.config.ts    # projects collection and its schema
+public/                  # files served as-is (favicon, CV)
+.github/workflows/       # build and deploy to GitHub Pages
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Adding a project
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Create a Markdown file in `src/content/projects/`:
 
-Any static assets, like images, can be placed in the `public/` directory.
+```markdown
+---
+title: "Project name"
+summary: "One sentence shown on the gallery card."
+stack: ["Java", "Spring Boot", "PostgreSQL"]
+repo: "https://github.com/DariusCristian/project-name"
+demo: "https://example.com"                      # optional
+image: "../../assets/projects/project-name.png"  # optional, 16:9
+order: 5
+---
 
-## 🧞 Commands
+## What it does
 
-All commands are run from the root of the project, from a terminal:
+The longer description shown on the project page.
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+The card, the project page and its route appear automatically. `order` controls the position in the gallery.
 
-## 👀 Want to learn more?
+## Running locally
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Requires Node.js 22.12 or newer.
+
+```bash
+npm install
+npm run dev       # development server at http://localhost:4321
+npm run build     # production build into dist/
+npm run preview   # preview the production build
+```
+
+## Deployment
+
+Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the site with the official Astro action and publishes it to GitHub Pages. The workflow only has permission to read the code and deploy to Pages.
+
+## Contact
+
+[GitHub](https://github.com/DariusCristian) · [LinkedIn](https://www.linkedin.com/in/darius-cristian-horatau/) · [Email](mailto:horataudariuscristian@gmail.com)
