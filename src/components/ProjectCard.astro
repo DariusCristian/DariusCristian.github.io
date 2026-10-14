@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import StackTags from './StackTags.astro';
 
 interface Props {
@@ -8,17 +9,20 @@ interface Props {
 
 const { project } = Astro.props;
 const { title, summary, stack, image } = project.data;
-
-// Image paths in frontmatter are relative to public/, so make sure they start with "/".
-const imageSrc = image && (image.startsWith('/') ? image : `/${image}`);
 ---
 
 <a class="card-link" href={`/projects/${project.id}`}>
 	<article class="card">
 		<div class="media">
 			{
-				imageSrc ? (
-					<img src={imageSrc} alt={`Screenshot of ${title}`} loading="lazy" />
+				image ? (
+					<Image
+						src={image}
+						alt={`Screenshot of ${title}`}
+						width={400}
+						densities={[1, 2]}
+						loading="lazy"
+					/>
 				) : (
 					<div class="placeholder" aria-hidden="true">
 						{title}
